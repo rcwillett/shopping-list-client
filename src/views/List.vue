@@ -60,6 +60,17 @@ export default {
                 this.error = true;
             }
         },
+        async markPurchased(itemId) {
+            try {
+                this.loading = true;
+                await list.purchasedItem(itemId);
+                const response = await list.getList();
+                this.groceryList = response.data;
+                this.loading = false;
+            } catch (error) {
+                this.error = true;
+            }
+        },
         toggleAddItem () {
             this.addingItem = !this.addingItem;
         },
@@ -81,12 +92,20 @@ export default {
         </div>
     </div>
     <div v-else-if="!loading && !error" class="row">
-        <div class="col-12 col-md-8 col-lg-6 mx-auto">
+        <div class="col-12 col-lg-8 mx-auto">
             <div class="row">
                 <div class="col-12">
                     <h2 class="my-3 text-center">Grocery List</h2>
                     <div v-if="groceryList.length > 0">
-                        <Item v-for="item in groceryList" :key="item.id" v-bind="item" :removeItem="removeItem" :updateItem="updateItem"></Item>
+                        <Item
+                            v-for="item in groceryList"
+                            :key="item.id"
+                            v-bind="item"
+                            :removeItem="removeItem"
+                            :updateItem="updateItem"
+                            :markPurchased="markPurchased"
+                        >
+                        </Item>
                     </div>
                     <div v-else>
                         <div class="col-12">

@@ -1,6 +1,6 @@
 <script>
 export default {
-    props: ['name', 'quantity', 'id', 'removeItem', 'updateItem'],
+    props: ['name', 'quantity', 'id', 'purchased', 'removeItem', 'updateItem', 'markPurchased'],
     data() {
         return {
             isEditing: false,
@@ -17,21 +17,24 @@ export default {
 </script>
 
 <template>
-    <div v-if="!isEditing" class="row my-1">
-        <div class="col-12 col-md-4">
+    <div v-if="!isEditing || purchased" class="row my-1">
+        <div class="col-12 col-md-4" :class="{strike: purchased}">
             {{ name }}
         </div>
-        <div class="col-12 col-md-2">
+        <div class="col-12 col-md-2" :class="{strike: purchased}">
             {{ quantity }}
         </div>
-        <div class="col ml-auto">
+        <div v-if="!purchased" class="col">
+            <button class="btn btn-success" @click="markPurchased(id)">Purchased</button>
+        </div>
+        <div v-if="!purchased" class="col">
             <button class="btn btn-primary" @click="$event => toggleEdit()">Edit</button>
         </div>
         <div class="col">
             <button class="btn btn-secondary" @click="removeItem(id)">Remove</button>
         </div>
     </div>
-    <div v-else class="row my-1 align-items-end">
+    <div v-else-if="!purchased" class="row my-1 align-items-end">
         <div class="col-12 col-md-4">
             <label class="form-label">Name</label>
             <input class="form-control" v-model="editName" />
@@ -40,11 +43,17 @@ export default {
             <label class="form-label">Quantity</label>
             <input class="form-control" v-model="editQuantity" type="number" />
         </div>
-        <div class="col ml-auto">
+        <div class="col">
             <button class="btn btn-primary" @click="updateItem(id, editName, editQuantity)">Update</button>
         </div>
-        <div class="col ml-auto">
+        <div class="col">
             <button class="btn btn-secondary" @click="toggleEdit()">Cancel</button>
         </div>
     </div>
 </template>
+
+<style>
+    .strike {
+        text-decoration: line-through;
+    }
+</style>
