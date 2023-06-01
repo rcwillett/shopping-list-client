@@ -2,7 +2,7 @@ import api from './api';
 
 export default new class {
     async login(username, password) {
-        return api.post('/auth/login', { username, password }, { withCredentials: true });
+        return api.post('/auth/login', { username, password });
     }
 
     async register(username, password) {

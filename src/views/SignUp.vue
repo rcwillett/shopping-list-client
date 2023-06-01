@@ -35,27 +35,33 @@ export default {
 </script>
 
 <template>
-    <div v-if="loading">
-        <Loader />
+    <div class="row justify-content-center" v-if="loading">
+        <div class="col">
+            <Loader />
+        </div>
     </div>
     <div v-else class="row">
-        <div class="col-12">
-            <h2>Sign up to start creating your grocery list!</h2>
-        </div>
-        <div class="col-12">
-            <input class="form-control" v-model="username" placeholder="Enter a user name"/>
-        </div>
-        <div class="col-12">
-            <input class="form-control" v-model="password" type="password" placeholder="Enter your password"/>
-        </div>
-        <div class="col-12">
-            <button class="btn btn-primary" @click="register">Sign Up</button>
-        </div>
-        <div class="col-12">
-            <button class="btn btn-secondary" @click="$router.push('/login')">Log In</button>
-        </div>
-        <div class="col-12" v-if="error">
-            <div class="error">{{ error }}</div>
+        <div class="col-12 col-md-6 col-lg-6 mx-auto">
+            <div class="row">
+                <div class="col-12 my-3">
+                    <h2 class="text-center">Sign up to start creating your grocery list!</h2>
+                </div>
+                <div class="col-12 my-1">
+                    <input class="form-control" v-model="username" placeholder="Enter a user name"/>
+                </div>
+                <div class="col-12 my-1">
+                    <input class="form-control" v-model="password" type="password" placeholder="Enter your password"/>
+                </div>
+                <div class="col-12 my-1">
+                    <button class="btn-block btn btn-primary" @click="register">Sign Up</button>
+                </div>
+                <div class="col-12 my-1">
+                    <button class="btn-block btn btn-secondary" @click="$router.push('/login')">Log In</button>
+                </div>
+                <div class="col-12 my-1" v-if="error">
+                    <div class="error">{{ error }}</div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
