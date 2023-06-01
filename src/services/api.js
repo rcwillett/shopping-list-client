@@ -1,11 +1,13 @@
 import axios from 'axios';
 
+axios.defaults.withCredentials = true
+
 const API_BASE_URL = import.meta.env.VITE_VUE_APP_API_URL;
 
 export default new class {
-    async post(url, data) {
+    async post(url, data, config) {
         try {
-            return await axios.post(`${API_BASE_URL}${url}`, data);
+            return await axios.post(`${API_BASE_URL}${url}`, data, config);
         } catch (error) {
             if (error && error.reponse && error.reseponse.status === 401) {
                 window.location.href = '/login';
