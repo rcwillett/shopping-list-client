@@ -11,6 +11,8 @@ export default new class {
         } catch (error) {
             if (error && error.reponse && error.reseponse.status === 401) {
                 window.location.href = '/login';
+            } else {
+                throw error;
             }
         }
     }
@@ -21,6 +23,8 @@ export default new class {
         } catch (error) {
             if (error && error.reponse && error.reseponse.status === 401) {
                 window.location.href = '/login';
+            } else {
+                throw error;
             }
         }
     }
@@ -31,6 +35,8 @@ export default new class {
         } catch (error) {
             if (error && error.reponse && error.reseponse.status === 401) {
                 window.location.href = '/login';
+            } else {
+                throw error;
             }
         }
     }
@@ -41,6 +47,8 @@ export default new class {
         } catch (error) {
             if (error && error.reponse && error.reseponse.status === 401) {
                 window.location.href = '/login';
+            } else {
+                throw error;
             }
         }
     }
